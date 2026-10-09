@@ -1,0 +1,26 @@
+services:
+  agent:
+    build: .
+    image: gaia-agent:dev
+    env_file: .env
+    environment:
+      PHOENIX_ENDPOINT: http://phoenix:6006/v1/traces
+      HF_HOME: /app/data/hf
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config:ro
+      - ./src:/app/src:ro          # live code edits without rebuilding
+    depends_on:
+      - phoenix
+
+  phoenix:
+    image: arizephoenix/phoenix:version-20.19.0
+    ports:
+      - "127.0.0.1:6006:6006"      # UI: http://localhost:6006
+    environment:
+      PHOENIX_WORKING_DIR: /mnt/data
+    volumes:
+      - phoenix-data:/mnt/data
+
+volumes:
+  phoenix-data:

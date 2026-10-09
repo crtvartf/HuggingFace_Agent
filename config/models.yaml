@@ -1,0 +1,25 @@
+# One block per role. Model ids are OpenRouter ids; pin exact ids (no "~...-latest" aliases)
+# so eval runs stay comparable. Prices (USD / 1M tokens, in/out) as of 2026-10-09.
+
+agent:                                   # the CodeAgent orchestrator
+  model: deepseek/deepseek-v4.1-flash    # 0.30 / 1.20, text+image, tools
+  temperature: 0.2
+  max_tokens: 8192
+  max_steps: 15
+  planning_interval: null                # e.g. 4 to re-plan every 4 steps
+
+vision:                                  # look_at_image
+  model: deepseek/deepseek-v4.1-flash
+  temperature: 0.0
+  max_tokens: 4096
+
+video:                                   # youtube_video_qa
+  model: google/gemini-2.5-flash-lite    # 0.10 / 0.40, accepts YouTube URLs
+  temperature: 0.0
+  max_tokens: 4096
+  provider_only: [google-ai-studio]      # only AI Studio takes YouTube URLs directly
+
+audio:                                   # transcribe_audio, runs locally
+  whisper_model: small                   # tiny | base | small | medium | large-v3
+  device: cpu
+  compute_type: int8
