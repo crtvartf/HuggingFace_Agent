@@ -33,7 +33,7 @@ Alternatives considered and not chosen: Pydantic AI (runner-up), OpenAI Agents S
 | M1 | Agent + tools (search, fetch, Wikipedia with revisions, YouTube, audio, vision, chess, files), answer normaliser, GAIA scorer port, `run` / `eval` / `submit` | done |
 | M2 | First live runs: smoke-test 3–4 tasks, then all 20; read the Phoenix traces | done: run `full-v1` scored **19/20 (95%)** locally, ~$0.16 |
 | M3 | Iterate on failures: prompts, tools, a dedicated image → FEN step for chess, planning interval, retries | |
-| M4 | Push to a public GitHub repo; set `AGENT_CODE_URL`; `gaia submit --yes` | |
+| M4 | Push to a public GitHub repo; set `AGENT_CODE_URL`; `gaia submit --yes` | done: official score **19/20 (95%)** on 2026-10-09 (run `full-v1`) |
 
 ## Question → route
 
