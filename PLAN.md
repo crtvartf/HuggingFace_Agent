@@ -21,14 +21,17 @@ Alternatives considered and not chosen: Pydantic AI (runner-up), OpenAI Agents S
 
 - The course API `/files/{task_id}` returns 404 for every task ("No file path associated with task_id").
   `gaia fetch` downloads these files from the gated `gaia-benchmark/GAIA` dataset instead, so it needs `HF_TOKEN` and accepted dataset terms.
+- `av` 19 removed the `metadata_errors` argument that `faster-whisper` 1.2.1 passes, which silently broke transcription. `av` is pinned to `<19`, and a test guards it.
+- The chess question fails: the vision model misreads the board (orientation, piece colours) and the agent runs out of steps. This is the M3 target.
+- When a task hits `max_steps`, smolagents' fallback answer can be junk (a code fragment). Treat it as unanswered.
 
 ## Milestones
 
 | # | Milestone | Status |
 |---|---|---|
 | M0 | Scaffold: repo, Docker, config, scoring API client, `gaia fetch` / `doctor` | done |
-| M1 | Agent + tools (search, fetch, Wikipedia with revisions, YouTube, audio, vision, chess, files), answer normaliser, GAIA scorer port, `run` / `eval` / `submit` | built and unit-tested; waiting on API keys for live runs |
-| M2 | First live runs: smoke-test 3–4 tasks, then all 20; read the Phoenix traces | next |
+| M1 | Agent + tools (search, fetch, Wikipedia with revisions, YouTube, audio, vision, chess, files), answer normaliser, GAIA scorer port, `run` / `eval` / `submit` | done |
+| M2 | First live runs: smoke-test 3–4 tasks, then all 20; read the Phoenix traces | done: run `full-v1` scored **19/20 (95%)** locally, ~$0.16 |
 | M3 | Iterate on failures: prompts, tools, a dedicated image → FEN step for chess, planning interval, retries | |
 | M4 | Push to a public GitHub repo; set `AGENT_CODE_URL`; `gaia submit --yes` | |
 

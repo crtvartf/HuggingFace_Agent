@@ -43,3 +43,14 @@ def test_chess_finds_mate_in_one():
 
 def test_chess_rejects_bad_fen():
     assert chess_best_move("not a fen").startswith("Invalid FEN")
+
+
+def test_av_accepts_faster_whisper_open_kwargs(tmp_path):
+    # faster-whisper passes metadata_errors= to av.open; av 19 removed it and broke transcription.
+    import inspect
+
+    import av
+    import faster_whisper.audio
+
+    assert "metadata_errors" in inspect.getsource(faster_whisper.audio.decode_audio)
+    assert int(av.__version__.split(".")[0]) < 19

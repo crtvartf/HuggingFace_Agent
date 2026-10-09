@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "arize-phoenix-otel>=0.17.2",
+    "av>=17,<19",
     "chess>=1.11.2",
     "cssselect>=1.5.0",
     "faster-whisper>=1.2.1",
